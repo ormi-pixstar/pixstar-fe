@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from '../pages/MainPage.jsx';
+import LoginPage from '../pages/LoginPage.jsx';
 import NotfoundPage from '../pages/NotfoundPage';
 
 const Router = () => {
@@ -7,6 +8,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainPage />} />
+        <Route path='/login' element={<LoginPage />} />
         <Route path='*' element={<NotfoundPage />} />
       </Routes>
     </BrowserRouter>
