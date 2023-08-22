@@ -1,5 +1,5 @@
 const MainPage = () => {
-  return <div>메인 페이지</div>;
+  return <div className='text-blue-500 text-xl font-bold'>메인 페이지</div>;
 };
 
 export default MainPage;
