@@ -11,9 +11,7 @@ export const __getPostList = createAsyncThunk(
   async (payload, api) => {
     try {
       const res = await axios.get(`list/`, {
-        params: {
-          ...payload,
-        },
+        params: { payload },
       });
       return api.fulfillWithValue(res.data);
     } catch (err) {
@@ -29,10 +27,10 @@ export const postSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(__getPostList.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(__getPostList.rejected, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
       });
   },
 });
