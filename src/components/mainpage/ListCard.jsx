@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const PostCard = ({ posts }) => {
+const ListCard = ({ posts }) => {
   const navigate = useNavigate();
 
   return (
@@ -25,4 +25,4 @@ const PostCard = ({ posts }) => {
   );
 };
 
-export default PostCard;
+export default ListCard;
