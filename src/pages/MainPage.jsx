@@ -32,14 +32,13 @@ const MainPage = () => {
 
   return (
     <>
-      <header>
-        <Header />
-      </header>
-      <main>
+      <Header />
+      <section className='flex flex-col md:flex-row'>
         <PostCard posts={posts} />
-      </main>
-      <footer>
         <Navbar />
+      </section>
+      <footer>
+        <address> © 2023. Pixstar. All rights reserved.</address>
       </footer>
     </>
   );
