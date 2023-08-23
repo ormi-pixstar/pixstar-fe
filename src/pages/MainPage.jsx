@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { __getPostList } from '../redux/modules/post.js';
 import Header from '../components/common/Header.jsx';
+import Navbar from '../components/common/Navbar.jsx';
+import PostCard from '../components/mainpage/PostCard.jsx';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -30,19 +32,15 @@ const MainPage = () => {
 
   return (
     <>
-      <Header />
+      <header>
+        <Header />
+      </header>
       <main>
-        {posts.map((post, id) => {
-          return (
-            <div key={id} className='border'>
-              <div> 이미지: </div>
-              <div> 내용: {post.content}</div>
-              <div> 작성자: {post.writer}</div>
-              <div> 좋아요 한 사람: {post.like}</div>
-            </div>
-          );
-        })}
+        <PostCard posts={posts} />
       </main>
+      <footer>
+        <Navbar />
+      </footer>
     </>
   );
 };
