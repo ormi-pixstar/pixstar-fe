@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { __signup, __login } from '../redux/modules/user.js';
 import AuthForm from '../components/authpage/AuthForm.jsx';
@@ -6,12 +5,7 @@ import AuthForm from '../components/authpage/AuthForm.jsx';
 const AuthPage = ({ formType }) => {
   const dispatch = useDispatch();
 
-  const [authData, setAuthData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const submitAuthData = async () => {
+  const submitAuthData = async (authData) => {
     await dispatch(
       formType === 'signup' ? __signup(authData) : __login(authData)
     )
@@ -23,13 +17,9 @@ const AuthPage = ({ formType }) => {
       });
   };
 
-  useEffect(() => {
-    submitAuthData();
-  }, []);
-
   return (
     <>
-      <AuthForm formType={formType} setAuthData={setAuthData} />
+      <AuthForm formType={formType} onSubmit={submitAuthData} />
     </>
   );
 };
