@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 import axios from '../../axios/axios.js';
-import setToken from '../../axios/setToken';
 
 const initialState = {
   isLog: false,
+  id: 0,
+  username: '',
 };
 
 // 회원가입
@@ -13,7 +13,7 @@ export const __signup = createAsyncThunk('signup', async (payload, api) => {
     const res = await axios.post(`user/signup/`, payload);
     console.log(res);
   } catch (err) {
-    return api.rejectWithValue(err);
+    return api.rejectWithValue(err.response);
   }
 });
 
@@ -21,9 +21,9 @@ export const __signup = createAsyncThunk('signup', async (payload, api) => {
 export const __login = createAsyncThunk('login', async (payload, api) => {
   try {
     const res = await axios.post(`user/login/`, payload);
-    console.log(res);
+    return api.fulfillWithValue(res.data);
   } catch (err) {
-    return api.rejectWithValue(err.response.status);
+    return api.rejectWithValue(err.response.data);
   }
 });
 
@@ -47,12 +47,13 @@ export const userSlice = createSlice({
 
       // 로그인
       .addCase(__login.fulfilled, (state, action) => {
-        localStorage.setItem('token', action.payload);
-        setToken(action.payload);
         state.isLog = true;
+        state.id = action.payload.user.id;
+        state.username = action.payload.user.username;
       })
       .addCase(__login.rejected, (state, action) => {
         state.isLog = false;
+        alert(action.payload.detail[0]);
       });
   },
 });

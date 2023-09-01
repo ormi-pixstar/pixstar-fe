@@ -9,10 +9,9 @@ const AuthPage = ({ formType }) => {
     await dispatch(
       formType === 'signup' ? __signup(authData) : __login(authData)
     )
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => {
+        alert('서버 연결에 문제가 발생했습니다.');
         console.log(err);
       });
   };
