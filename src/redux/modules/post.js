@@ -10,7 +10,7 @@ export const __getPostList = createAsyncThunk(
   'getPostList',
   async (payload, api) => {
     try {
-      const res = await axios.get(`list/`, {
+      const res = await axios.get(`post/list/`, {
         params: { payload },
       });
       return api.fulfillWithValue(res.data);
@@ -25,7 +25,7 @@ export const __getPostDetail = createAsyncThunk(
   'getPostDetail',
   async (payload, api) => {
     try {
-      const res = await axios.get(`detail/${payload}/`);
+      const res = await axios.get(`post/detail/${payload}/`);
       return api.fulfillWithValue(res.data);
     } catch (err) {
       return api.rejectWithValue(err.stack);
