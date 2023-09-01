@@ -10,7 +10,7 @@ const initialState = {
 // 회원가입
 export const __signup = createAsyncThunk('signup', async (payload, api) => {
   try {
-    const res = await axios.post(`users/signup`, payload);
+    const res = await axios.post(`user/signup`, payload);
     console.log(res);
   } catch (err) {
     return api.rejectWithValue(err);
@@ -20,7 +20,7 @@ export const __signup = createAsyncThunk('signup', async (payload, api) => {
 // 로그인
 export const __login = createAsyncThunk('login', async (payload, api) => {
   try {
-    const res = await axios.post(`users/login/`, payload);
+    const res = await axios.post(`user/login/`, payload);
     console.log(res);
   } catch (err) {
     return api.rejectWithValue(err.response.status);
