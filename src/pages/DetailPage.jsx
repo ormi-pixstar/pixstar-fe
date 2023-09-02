@@ -9,12 +9,25 @@ const DetailPage = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({
+    id: 0,
+    content: '',
+    image_urls: [],
+    like: [],
+    created_at: '',
+    updated_at: '',
+    writer: {
+      id: 0,
+      email: '',
+      username: '',
+      profile_img: null,
+    },
+  });
 
   const getPostDetail = async () => {
     await dispatch(__getPostDetail(id))
       .then((res) => {
-        setPost(res.payload.results);
+        setPost(res.payload);
       })
       .catch((err) => {
         console.log(err);
@@ -24,6 +37,7 @@ const DetailPage = () => {
   useEffect(() => {
     getPostDetail();
   }, []);
+
   return (
     <>
       <Header />
