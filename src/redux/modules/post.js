@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import axios from '../../axios/axios.js';
-import setToken from '../../axios/setToken';
 
 const initialState = [];
 
