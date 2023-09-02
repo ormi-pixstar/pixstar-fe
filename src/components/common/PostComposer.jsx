@@ -13,7 +13,7 @@ const PostComposer = () => {
     setImages(selectedImages);
   };
 
-  const handleSubmit = (e) => {
+  const handlePostSubmit = (e) => {
     e.preventDefault();
 
     console.log(content, images);
@@ -25,7 +25,7 @@ const PostComposer = () => {
 
   return (
     <div className='border'>
-      <form onSubmit={handleSubmit} className='flex'>
+      <form onSubmit={handlePostSubmit} className='flex'>
         <div>
           <input
             type='text'
