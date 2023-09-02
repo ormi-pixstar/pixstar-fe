@@ -29,8 +29,6 @@ const PostComposer = () => {
         <div>
           <input
             type='text'
-            id='content'
-            name='content'
             placeholder='일상을 공유하세요!'
             value={content}
             onChange={handleContentChange}
@@ -40,8 +38,6 @@ const PostComposer = () => {
         <div>
           <input
             type='file'
-            id='images'
-            name='images'
             accept='image/*'
             onChange={handleImageChange}
             multiple
