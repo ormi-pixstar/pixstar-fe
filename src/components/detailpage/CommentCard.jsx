@@ -3,8 +3,6 @@ import convertToKoreanDate from '../../utils/convertToKoreanDate.js';
 const CommentCard = ({ comment }) => {
   const formattedDate = convertToKoreanDate(comment.created_at);
 
-  console.log(comment);
-
   return (
     <div>
       <div className='flex gap-4 items-center'>
