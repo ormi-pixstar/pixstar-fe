@@ -5,7 +5,7 @@ const AuthForm = ({ formType, onSubmit }) => {
   const [authData, setAuthData] = useState({
     email: '',
     password: '',
-    confirmPassword: '',
+    confirm_password: '',
   });
 
   const handleInputChange = (e) => {
@@ -23,15 +23,15 @@ const AuthForm = ({ formType, onSubmit }) => {
 
     if (
       formType === 'signup' &&
-      authData.password !== authData.confirmPassword
+      authData.password !== authData.confirm_password
     ) {
       alert('Password가 일치하지 않습니다.');
       return;
     }
 
     // formType에 따라 API로 보낼 데이터를 결정
-    if (formType === 'signup') {
-      delete authToSend.confirmPassword;
+    if (formType !== 'signup') {
+      delete authToSend.confirmassword;
     }
 
     onSubmit(authToSend);
@@ -56,10 +56,10 @@ const AuthForm = ({ formType, onSubmit }) => {
       {formType === 'login' ? null : (
         <>
           <input
-            name='confirmPassword'
+            name='confirm_password'
             placeholder='비밀번호 재확인'
             type='password'
-            value={authData.confirmPassword}
+            value={authData.confirm_password}
             onChange={handleInputChange}
           />
         </>
