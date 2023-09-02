@@ -6,7 +6,7 @@ const ListCard = ({ posts }) => {
   return (
     <main>
       <article>
-        {posts.map((post, id) => {
+        {posts?.map((post, id) => {
           return (
             <div
               key={id}
