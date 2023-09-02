@@ -11,6 +11,7 @@ const initialState = {
 export const __signup = createAsyncThunk('signup', async (payload, api) => {
   try {
     const res = await axios.post(`user/signup/`, payload);
+    return api.fulfillWithValue(res);
   } catch (err) {
     return api.rejectWithValue(err.response);
   }
