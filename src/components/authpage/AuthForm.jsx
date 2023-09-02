@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SubmitBtn from '../common/SubmitBtn.jsx';
+import AuthFormBtn from '../common/AuthFormBtn.jsx';
 
 const AuthForm = ({ formType, onSubmit }) => {
   const [authData, setAuthData] = useState({
@@ -64,7 +64,7 @@ const AuthForm = ({ formType, onSubmit }) => {
           />
         </>
       )}
-      <SubmitBtn
+      <AuthFormBtn
         name={formType === 'login' ? '로그인' : '회원가입'}
       />
     </form>
