@@ -5,7 +5,6 @@ import axios from '../../axios/axios.js';
 const initialState = {
   postList: [],
   postDetail: {},
-  comments: [],
 };
 
 // 포스트 조회 및 검색
