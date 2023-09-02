@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { __getPostList } from '../redux/modules/post.js';
 import Header from '../components/common/Header.jsx';
 import Navbar from '../components/common/Navbar.jsx';
+import PostComposer from '../components/common/PostComposer.jsx';
 import ListCard from '../components/mainpage/ListCard.jsx';
 
 const MainPage = () => {
@@ -33,6 +34,7 @@ const MainPage = () => {
   return (
     <>
       <Header />
+      <PostComposer />
       <section className='flex flex-col md:flex-row'>
         <ListCard posts={posts} />
         <Navbar />
