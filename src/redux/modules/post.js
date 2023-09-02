@@ -2,7 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import axios from '../../axios/axios.js';
 
-const initialState = [];
+const initialState = {
+  postList: [],
+  postDetail: {},
+  comments: [],
+};
 
 // 포스트 조회 및 검색
 export const __getPostList = createAsyncThunk(
@@ -25,7 +29,7 @@ export const __getPostDetail = createAsyncThunk(
   async (payload, api) => {
     try {
       const res = await axios.get(`post/detail/${payload}/`);
-      return api.fulfillWithValue(res.data);
+      return api.fulfillWithValue(res.data.post);
     } catch (err) {
       return api.rejectWithValue(err.stack);
     }
@@ -40,17 +44,18 @@ export const postSlice = createSlice({
     builder
       // 포스트 목록 조회
       .addCase(__getPostList.fulfilled, (state, action) => {
-        // console.log(action.payload);
+        state.postList = action.payload.results;
       })
       .addCase(__getPostList.rejected, (state, action) => {
-        // console.log(action.payload);
+        console.log(action.payload); // 예외처리 추가 필요
       })
+
       // 포스트 상세 조회
       .addCase(__getPostDetail.fulfilled, (state, action) => {
-        // console.log(action.payload);
+        state.postDetail = action.payload;
       })
       .addCase(__getPostDetail.rejected, (state, action) => {
-        // console.log(action.payload);
+        console.log(action.payload); // 예외처리 추가 필요
       });
   },
 });
