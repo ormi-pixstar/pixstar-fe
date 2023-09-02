@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { __getPostDetail } from '../redux/modules/post';
-import { __getComments } from '../redux/modules/comment.js';
+import { __getComments, __writeComment } from '../redux/modules/comment.js';
 import Header from '../components/common/Header.jsx';
 import DetailCard from '../components/detailpage/DetailCard.jsx';
 import CommentComposer from '../components/detailpage/CommentComposer.jsx';
@@ -48,6 +48,17 @@ const DetailPage = () => {
       });
   };
 
+  const submitComment = async (newComment) => {
+    console.log(newComment);
+    await dispatch(__writeComment({ id, newComment }))
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getPostDetail();
     getComments();
@@ -58,7 +69,7 @@ const DetailPage = () => {
       <Header />
       <DetailCard post={post} />
       <CommentList comments={comments} />
-      <CommentComposer />
+      <CommentComposer submitComment={submitComment} />
     </>
   );
 };
