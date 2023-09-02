@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { __getPostDetail } from '../redux/modules/post';
+import { __getComments } from '../redux/modules/comment.js';
 import Header from '../components/common/Header.jsx';
 import DetailCard from '../components/detailpage/DetailCard.jsx';
 import CommentComposer from '../components/detailpage/CommentComposer.jsx';
@@ -25,6 +26,7 @@ const DetailPage = () => {
       profile_img: null,
     },
   });
+  const [comments, setComments] = useState([]);
 
   const getPostDetail = async () => {
     await dispatch(__getPostDetail(id))
@@ -36,15 +38,26 @@ const DetailPage = () => {
       });
   };
 
+  const getComments = async () => {
+    await dispatch(__getComments(id))
+      .then((res) => {
+        setComments(res.payload);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getPostDetail();
+    getComments();
   }, []);
 
   return (
     <>
       <Header />
       <DetailCard post={post} />
-      <CommentList />
+      <CommentList comments={comments} />
       <CommentComposer />
     </>
   );

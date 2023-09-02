@@ -12,8 +12,7 @@ export const __getComments = createAsyncThunk(
   async (payload, api) => {
     try {
       const res = await axios.get(`post/detail/${payload}/comment/`);
-      console.log(res);
-      //   return api.fulfillWithValue(res.data);
+      return api.fulfillWithValue(res.data);
     } catch (err) {
       return api.rejectWithValue(err.stack);
     }
@@ -28,7 +27,7 @@ export const commentSlice = createSlice({
     builder
       // 댓글 목록 조회
       .addCase(__getComments.fulfilled, (state, action) => {
-        // state.postList = action.payload.results;
+        state.comments = action.payload;
       })
       .addCase(__getComments.rejected, (state, action) => {
         console.log(action.payload); // 예외처리 추가 필요

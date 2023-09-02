@@ -1,9 +1,13 @@
-const CommentList = () => {
+import CommentCard from './CommentCard.jsx';
+
+const CommentList = ({ comments }) => {
   return (
     <div>
       <ul>
         <li>
-          <div>댓글목록</div>
+          {comments?.map((comment, i) => {
+            return <CommentCard key={i} comment={comment} />;
+          })}
         </li>
       </ul>
     </div>
