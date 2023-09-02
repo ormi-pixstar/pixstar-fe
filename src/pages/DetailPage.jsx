@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { __getPostDetail } from '../redux/modules/post';
 import Header from '../components/common/Header.jsx';
 import DetailCard from '../components/detailpage/DetailCard.jsx';
+import CommentComposer from '../components/detailpage/CommentComposer.jsx';
+import CommentList from '../components/detailpage/CommentList.jsx';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -42,6 +44,8 @@ const DetailPage = () => {
     <>
       <Header />
       <DetailCard post={post} />
+      <CommentList />
+      <CommentComposer />
     </>
   );
 };
