@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ setQuery, setIsSearch }) => {
+  // 로그인 유저 id값 조회
+  const userId = useSelector((state) => state.user.id);
+
   // 메인화면 리렌더링
   const convertToPostComposer = () => {
     setIsSearch(false);
@@ -21,7 +25,7 @@ const Navbar = ({ setQuery, setIsSearch }) => {
     <nav className='md:bg-gray-100 md:m-4'>
       <ul className='flex flex-row md:flex-col md:gap-2'>
         <li>
-          <Link to='/profile'>
+          <Link to={`/profile/${userId}`}>
             <i className='mr-2 fas fa-user fa-2x'></i>
             <span className='hidden md:inline-block'>마이페이지</span>
           </Link>
