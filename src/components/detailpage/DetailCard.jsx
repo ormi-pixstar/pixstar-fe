@@ -9,7 +9,7 @@ const DetailCard = ({ post }) => {
       <div className='w-[100%] flex items-center justify-between'>
         <div className='flex gap-2'>
           <img
-            src={post.writer.profile_img || profilePlaceholder}
+            src={post.writer.image_url || profilePlaceholder}
             alt='프로필사진'
             className='w-8 h-8 rounded-full'
           />

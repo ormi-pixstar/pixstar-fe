@@ -23,7 +23,7 @@ const DetailPage = () => {
       id: 0,
       email: '',
       username: '',
-      profile_img: null,
+      image_url: null,
     },
   });
   const [comments, setComments] = useState([]);

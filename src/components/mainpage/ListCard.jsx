@@ -17,7 +17,7 @@ const ListCard = ({ posts }) => {
             >
               <div className='flex gap-2 items-center'>
                 <img
-                  src={post.writer.profile_img || profilePlaceholder}
+                  src={post.writer.image_url || profilePlaceholder}
                   alt='프로필사진'
                   className='w-12 h-12 rounded-full'
                 />
