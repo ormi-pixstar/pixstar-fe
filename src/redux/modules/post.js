@@ -35,6 +35,22 @@ export const __getPostDetail = createAsyncThunk(
   }
 );
 
+// 포스트 작성
+export const __submitPost = createAsyncThunk(
+  'submitPost',
+  async (payload, api) => {
+    console.log(payload);
+    try {
+      const res = await axios.post(`post/write/`, payload, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return api.fulfillWithValue(res.data);
+    } catch (err) {
+      return api.rejectWithValue(err.stack);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -54,6 +70,14 @@ export const postSlice = createSlice({
         state.postDetail = action.payload;
       })
       .addCase(__getPostDetail.rejected, (state, action) => {
+        console.log(action.payload); // 예외처리 추가 필요
+      })
+
+      // 포스트 작성
+      .addCase(__submitPost.fulfilled, (state, action) => {
+        state.postDetail = action.payload;
+      })
+      .addCase(__submitPost.rejected, (state, action) => {
         console.log(action.payload); // 예외처리 추가 필요
       });
   },

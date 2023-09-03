@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { __getPostList } from '../redux/modules/post.js';
+import { __getPostList, __submitPost } from '../redux/modules/post.js';
 import Header from '../components/common/Header.jsx';
 import Navbar from '../components/common/Navbar.jsx';
 import PostComposer from '../components/mainpage/PostComposer.jsx';
@@ -16,6 +16,8 @@ const MainPage = () => {
     search: '',
     sort: 'desc',
   });
+
+  // 게시글 목록
   const [posts, setPosts] = useState([]);
 
   // PostComposer와 Searchbar를 토글
@@ -25,6 +27,35 @@ const MainPage = () => {
     await dispatch(__getPostList(query))
       .then((res) => {
         setPosts(res.payload.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // FormData 생성
+  const formatData = (e) => {
+    const formData = new FormData();
+    const content = e.target[0].value;
+    const images = Array.from(e.target[1].files);
+
+    console.log(content, images);
+
+    formData.append('content', content);
+    formData.append('images', images);
+
+    return formData;
+  };
+
+  // 파일 서버에 전송
+  const submitPost = async (e) => {
+    e.preventDefault();
+
+    const formattedData = formatData(e);
+
+    await dispatch(__submitPost(formattedData))
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +72,7 @@ const MainPage = () => {
       {isSearch ? (
         <Searchbar query={query} setQuery={setQuery} />
       ) : (
-        <PostComposer />
+        <PostComposer submitPost={submitPost} />
       )}
       <section className='flex flex-col md:flex-row'>
         <ListCard posts={posts} />

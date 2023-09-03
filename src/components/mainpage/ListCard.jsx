@@ -12,10 +12,10 @@ const ListCard = ({ posts }) => {
             <div
               key={id}
               id='postCard'
-              className='rounded-lg p-4 flex flex-col gap-2'
+              className='flex flex-col gap-2 p-4 rounded-lg'
               onClick={() => navigate(`/detail/${post.id}`)}
             >
-              <div className='flex gap-2 items-center'>
+              <div className='flex items-center gap-2'>
                 <img
                   src={post.writer.image_url || profilePlaceholder}
                   alt='프로필사진'
@@ -24,15 +24,15 @@ const ListCard = ({ posts }) => {
                 <p className='text-lg'>{post.writer.username}</p>
               </div>
               <div className='cursor-pointer'>
-                <div className='text-lg mb-4'> {post.content}</div>
+                <div className='mb-4 text-lg'> {post.content}</div>
                 <img
                   src={post.image_urls[0]?.image_url}
                   alt='게시글 사진'
                   className='max-w-[50vh] h-[40vh] object-cover rounded-lg shadow-md'
                 />
               </div>
-              <div className='flex gap-2 items-center'>
-                <i className='far fa-heart text-red-500'></i>
+              <div className='flex items-center gap-2'>
+                <i className='text-red-500 far fa-heart'></i>
                 {post.like.length}
               </div>
             </div>
