@@ -17,7 +17,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to='/'>
+          <Link to='/search'>
             <i className='mr-2 fas fa-search fa-2x'></i>
             <span className='hidden md:inline-block'>검색</span>
           </Link>
