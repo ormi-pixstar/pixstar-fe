@@ -31,8 +31,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setLogin: (state, action) => {
-      state.isLog = action.payload;
+    restoreUser: (state, action) => {
+      state.id = action.payload.id;
+      state.username = action.payload.username;
+      state.isLog = true;
     },
   },
   extraReducers: (builder) => {
@@ -50,6 +52,11 @@ export const userSlice = createSlice({
         state.isLog = true;
         state.id = action.payload.user.id;
         state.username = action.payload.user.username;
+
+        // 로컬스토리지에 로그인한 유저 정보를 저장
+        localStorage.setItem('isLog', 'true');
+        localStorage.setItem('id', action.payload.user.id);
+        localStorage.setItem('username', action.payload.user.username);
       })
       .addCase(__login.rejected, (state, action) => {
         state.isLog = false;
@@ -59,7 +66,7 @@ export const userSlice = createSlice({
 });
 
 // actions
-export const { setLogin } = userSlice.actions;
+export const { restoreUser } = userSlice.actions;
 
 //reducer
 export default userSlice.reducer;
