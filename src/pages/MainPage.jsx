@@ -18,9 +18,6 @@ const MainPage = () => {
   });
   const [posts, setPosts] = useState([]);
 
-  // 홈 화면 리렌더링
-  const [rerender, setRerender] = useState(false);
-
   // PostComposer와 Searchbar를 토글
   const [isSearch, setIsSearch] = useState(false);
 
@@ -36,19 +33,19 @@ const MainPage = () => {
 
   useEffect(() => {
     getPosts();
-  }, [query, rerender]);
+  }, [query]);
 
   return (
     <>
       <Header />
-      {isSearch ? <Searchbar setQuery={setQuery} /> : <PostComposer />}
+      {isSearch ? (
+        <Searchbar query={query} setQuery={setQuery} />
+      ) : (
+        <PostComposer />
+      )}
       <section className='flex flex-col md:flex-row'>
         <ListCard posts={posts} />
-        <Navbar
-          rerender={rerender}
-          setRerender={setRerender}
-          setIsSearch={setIsSearch}
-        />
+        <Navbar setQuery={setQuery} setIsSearch={setIsSearch} />
       </section>
       <footer>
         <address> © 2023. Pixstar. All rights reserved.</address>

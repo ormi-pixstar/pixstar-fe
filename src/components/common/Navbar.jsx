@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ rerender, setRerender, setIsSearch }) => {
+const Navbar = ({ setQuery, setIsSearch }) => {
   // 메인화면 리렌더링
   const convertToPostComposer = () => {
     setIsSearch(false);
-    setRerender(!rerender);
+    // 포스트 리스트 초기화
+    setQuery({
+      page: 1,
+      search: '',
+      sort: 'desc',
+    });
   };
 
   // 검색창 활성화

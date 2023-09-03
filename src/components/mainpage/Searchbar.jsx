@@ -1,15 +1,11 @@
-import { useState } from 'react';
-
-const Searchbar = () => {
-  const [searchText, setSearchText] = useState('');
-
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-  };
-
-  const handleSearchSubmit = (e) => {
+const Searchbar = ({ query, setQuery }) => {
+  const handleQuerySubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      search: e.target.value,
+    }));
   };
 
   return (
@@ -17,11 +13,13 @@ const Searchbar = () => {
       <form>
         <input
           type='text'
-          placeholder='검색어를 입력하세요.'
-          value={searchText}
-          onChange={handleSearchChange}
+          placeholder='게시글 또는 @닉네임을 검색하세요'
+          value={query.search}
+          onChange={handleQuerySubmit}
         />
-        <button type='submit'>검색</button>
+        <button type='submit'>
+          <i className='fas fa-search'></i>
+        </button>
       </form>
     </div>
   );
