@@ -26,7 +26,7 @@ const ListCard = ({ posts }) => {
               <div className='cursor-pointer'>
                 <div className='text-lg mb-4'> {post.content}</div>
                 <img
-                  src={post.image_urls[0].image_url}
+                  src={post.image_urls[0]?.image_url}
                   alt='게시글 사진'
                   className='max-w-[50vh] h-[40vh] object-cover rounded-lg shadow-md'
                 />
