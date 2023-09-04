@@ -39,12 +39,9 @@ const MainPage = () => {
     const content = e.target[0].value;
     const images = Array.from(e.target[1].files);
 
-    console.log(content, images);
-
-    formData.append('content', content);
     formData.append('images', images);
 
-    return formData;
+    return { content: content, image_urls: formData };
   };
 
   // 파일 서버에 전송
@@ -67,21 +64,27 @@ const MainPage = () => {
   }, [query]);
 
   return (
-    <>
+    <div className='min-h-screen bg-gray-100'>
       <Header />
-      {isSearch ? (
-        <Searchbar query={query} setQuery={setQuery} />
-      ) : (
-        <PostComposer submitPost={submitPost} />
-      )}
-      <section className='flex flex-col md:flex-row'>
-        <ListCard posts={posts} />
-        <Navbar setQuery={setQuery} setIsSearch={setIsSearch} />
-      </section>
-      <footer>
-        <address> © 2023. Pixstar. All rights reserved.</address>
+      <div className='px-4 py-8 md:px-8 md:py-12'>
+        {isSearch ? (
+          <Searchbar query={query} setQuery={setQuery} />
+        ) : (
+          <PostComposer submitPost={submitPost} />
+        )}
+        <section className='grid grid-cols-1 gap-8 mt-8 md:grid-cols-4'>
+          <main className='md:col-span-3'>
+            <ListCard posts={posts} />
+          </main>
+          <aside className='md:col-span-1'>
+            <Navbar setQuery={setQuery} setIsSearch={setIsSearch} />
+          </aside>
+        </section>
+      </div>
+      <footer className='p-4 pb-16 text-white bg-gray-900 md:pb-4'>
+        <address>© 2023. Pixstar. All rights reserved.</address>
       </footer>
-    </>
+    </div>
   );
 };
 

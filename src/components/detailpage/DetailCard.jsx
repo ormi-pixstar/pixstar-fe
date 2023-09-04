@@ -32,7 +32,7 @@ const DetailCard = ({ post }) => {
         </div>
         <p>{post.content}</p>
       </main>
-      <div className='flex gap-2 items-center'>
+      <div className='flex items-center gap-2'>
         <i className='far fa-heart'></i>
         {post.like.length}
       </div>
