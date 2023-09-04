@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 import axios from '../../axios/axios.js';
-import setToken from '../../axios/setToken';
 
 const initialState = {
   isLog: false,
+  id: 0,
+  username: '',
 };
 
 // 회원가입
 export const __signup = createAsyncThunk('signup', async (payload, api) => {
   try {
-    const res = await axios.post(`user/signup`, payload);
-    console.log(res);
+    const res = await axios.post(`user/signup/`, payload);
+    return api.fulfillWithValue(res);
   } catch (err) {
-    return api.rejectWithValue(err);
+    return api.rejectWithValue(err.response);
   }
 });
 
@@ -21,18 +21,33 @@ export const __signup = createAsyncThunk('signup', async (payload, api) => {
 export const __login = createAsyncThunk('login', async (payload, api) => {
   try {
     const res = await axios.post(`user/login/`, payload);
-    console.log(res);
+    return api.fulfillWithValue(res.data);
   } catch (err) {
-    return api.rejectWithValue(err.response.status);
+    return api.rejectWithValue(err.response.data);
   }
 });
+
+// 유저 정보 조회
+export const __getProfile = createAsyncThunk(
+  'getProfile',
+  async (payload, api) => {
+    try {
+      const res = await axios.get(`user/profile/${payload}/`);
+      return api.fulfillWithValue(res.data);
+    } catch (err) {
+      return api.rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setLogin: (state, action) => {
-      state.isLog = action.payload;
+    restoreUser: (state, action) => {
+      state.id = action.payload.id;
+      state.username = action.payload.username;
+      state.isLog = true;
     },
   },
   extraReducers: (builder) => {
@@ -47,18 +62,30 @@ export const userSlice = createSlice({
 
       // 로그인
       .addCase(__login.fulfilled, (state, action) => {
-        localStorage.setItem('token', action.payload);
-        setToken(action.payload);
         state.isLog = true;
+        state.id = action.payload.user.id;
+        state.username = action.payload.user.username;
+
+        // 로컬스토리지에 로그인한 유저 정보를 저장
+        localStorage.setItem('isLog', 'true');
+        localStorage.setItem('id', action.payload.user.id);
+        localStorage.setItem('username', action.payload.user.username);
       })
       .addCase(__login.rejected, (state, action) => {
         state.isLog = false;
+        alert(action.payload.detail[0]);
+      })
+
+      // 유저 정보 조회
+      .addCase(__getProfile.fulfilled, (state, action) => {})
+      .addCase(__getProfile.rejected, (state, action) => {
+        console.log(action.payload);
       });
   },
 });
 
 // actions
-export const { setLogin } = userSlice.actions;
+export const { restoreUser } = userSlice.actions;
 
 //reducer
 export default userSlice.reducer;
