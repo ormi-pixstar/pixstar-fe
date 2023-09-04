@@ -10,7 +10,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const [profile, setProfile] = useState({
+  const [userInfo, setUserInfo] = useState({
     id: 0,
     email: '',
     username: '',
@@ -20,8 +20,7 @@ const ProfilePage = () => {
   const getProfile = async () => {
     await dispatch(__getProfile(id))
       .then((res) => {
-        console.log(res);
-        setProfile(res.payload.results);
+        setUserInfo(res.payload);
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +35,7 @@ const ProfilePage = () => {
     <>
       <Header />
       <section className='flex flex-col md:flex-row'>
-        <ProfileCard profile={profile} />
+        <ProfileCard userInfo={userInfo} />
         <Navbar />
       </section>
     </>

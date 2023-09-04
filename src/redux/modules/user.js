@@ -32,7 +32,7 @@ export const __getProfile = createAsyncThunk(
   'getProfile',
   async (payload, api) => {
     try {
-      const res = await axios.get(`user/profile/${payload}`);
+      const res = await axios.get(`user/profile/${payload}/`);
       return api.fulfillWithValue(res.data);
     } catch (err) {
       return api.rejectWithValue(err.response.data);
@@ -77,9 +77,7 @@ export const userSlice = createSlice({
       })
 
       // 유저 정보 조회
-      .addCase(__getProfile.fulfilled, (state, action) => {
-        console.log(action.payload);
-      })
+      .addCase(__getProfile.fulfilled, (state, action) => {})
       .addCase(__getProfile.rejected, (state, action) => {
         console.log(action.payload);
       });
