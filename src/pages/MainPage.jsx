@@ -39,12 +39,9 @@ const MainPage = () => {
     const content = e.target[0].value;
     const images = Array.from(e.target[1].files);
 
-    console.log(content, images);
-
-    formData.append('content', content);
     formData.append('images', images);
 
-    return formData;
+    return { content: content, image_urls: formData };
   };
 
   // 파일 서버에 전송
