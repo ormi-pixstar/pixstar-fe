@@ -1,17 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
   const path = window.location.pathname;
 
   return (
-    <header className='flex gap-2'>
+    <header className='flex items-center justify-between p-4 text-white bg-blue-500'>
       {path === '/' ? null : (
-        <button onClick={() => navigate(-1)} className='block md:hidden'>
-          {'<'}
+        <button onClick={() => navigate(-1)} className='block p-2 md:hidden'>
+          <i className='fas fa-arrow-left'></i>
         </button>
       )}
-      <h1>Pixstar</h1>
+      <Link to='/'>
+        <h1 className='text-2xl font-bold'>Pixstar</h1>
+      </Link>
     </header>
   );
 };
