@@ -22,29 +22,37 @@ const Navbar = ({ setQuery, setIsSearch }) => {
   };
 
   return (
-    <nav className='md:bg-gray-100 md:m-4'>
-      <ul className='flex flex-row md:flex-col md:gap-2'>
-        <li>
-          <Link to={`/profile/${userId}`}>
-            <i className='mr-2 fas fa-user fa-2x'></i>
+    <nav className='fixed bottom-0 left-0 right-0 z-10 w-full p-2 bg-gray-100 md:sticky md:top-0 md:m-4'>
+      <ul className='flex flex-row justify-around md:flex-col md:gap-5'>
+        <li className='bg-white rounded-md hover:text-blue-500 md:p-4'>
+          <Link to={`/profile/${userId}`} className='flex items-center gap-2'>
+            <i className='fas fa-user fa-2x'></i>
             <span className='hidden md:inline-block'>마이페이지</span>
           </Link>
         </li>
-        <li>
-          <Link to='/' onClick={convertToPostComposer}>
-            <i className='mr-2 fas fa-home fa-2x'></i>
+        <li className='bg-white rounded-md hover:text-blue-500 md:p-4'>
+          <Link
+            to='/'
+            onClick={convertToPostComposer}
+            className='flex items-center gap-2'
+          >
+            <i className='fas fa-home fa-2x'></i>
             <span className='hidden md:inline-block'>홈</span>
           </Link>
         </li>
-        <li>
-          <Link to='/' onClick={convertToSearchbar}>
-            <i className='mr-2 fas fa-search fa-2x'></i>
+        <li className='bg-white rounded-md hover:text-blue-500 md:p-4'>
+          <Link
+            to='/'
+            onClick={convertToSearchbar}
+            className='flex items-center gap-2'
+          >
+            <i className='fas fa-search fa-2x'></i>
             <span className='hidden md:inline-block'>검색</span>
           </Link>
         </li>
-        <li>
-          <Link to='/login'>
-            <i className='mr-2 fas fa-sign-in-alt fa-2x'></i>
+        <li className='bg-white rounded-md hover:text-blue-500 md:p-4'>
+          <Link to='/login' className='flex items-center gap-2'>
+            <i className='fas fa-sign-in-alt fa-2x'></i>
             <span className='hidden md:inline-block'>로그인</span>
           </Link>
         </li>
