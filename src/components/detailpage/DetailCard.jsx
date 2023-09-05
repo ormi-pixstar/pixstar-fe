@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import getFormattedTimeAgo from '../../utils/getFormattedTimeAgo';
 import profilePlaceholder from '../../assets/images/profilePlaceholder.svg';
 
@@ -5,20 +6,23 @@ const DetailCard = ({ post }) => {
   const formattedTimeAgo = getFormattedTimeAgo(post.created_at);
 
   return (
-    <section>
-      <div className='w-[100%] flex items-center justify-between'>
-        <div className='flex gap-2'>
+    <section className='p-4 m-4 bg-white rounded-lg shadow-md'>
+      <div className='flex items-center justify-between p-2 mb-4 bg-gray-100 rounded-md'>
+        <Link
+          to={`/profile/${post.writer.id}`}
+          className='flex gap-2 cursor-pointer'
+        >
           <img
             src={post.writer.image_url || profilePlaceholder}
             alt='프로필사진'
             className='w-8 h-8 rounded-full'
           />
-          <p className='text-xl'>{post.writer.username}</p>
-        </div>
-        <p>{formattedTimeAgo}</p>
+          <p className='text-xl font-medium'>@{post.writer.username}</p>
+        </Link>
+        <p className='text-gray-600'>{formattedTimeAgo}</p>
       </div>
-      <main>
-        <div className='w-[50vw] flex gap-4'>
+      <main className='mb-4'>
+        <div className='flex w-full gap-4 overflow-x-scroll'>
           {post.image_urls.map((image, i) => {
             return (
               <img
@@ -30,13 +34,15 @@ const DetailCard = ({ post }) => {
             );
           })}
         </div>
-        <p>{post.content}</p>
+        <p className='mt-4 text-lg'>{post.content}</p>
       </main>
-      <div className='flex items-center gap-2'>
-        <i className='far fa-heart'></i>
+      <div></div>
+      <div className='flex items-center gap-2 text-gray-700'>
+        <i className='text-red-500 far fa-heart'></i>
         {post.like.length}
       </div>
     </section>
   );
 };
+
 export default DetailCard;
