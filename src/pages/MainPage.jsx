@@ -81,7 +81,7 @@ const MainPage = () => {
           </aside>
         </section>
       </div>
-      <footer className='fixed bottom-0 w-full p-4 pb-16 text-white bg-gray-900 md:pb-4'>
+      <footer className='relative bottom-0 w-full p-4 pb-16 text-white bg-gray-900 md:pb-4'>
         <address>© 2023. Pixstar. All rights reserved.</address>
       </footer>
     </div>

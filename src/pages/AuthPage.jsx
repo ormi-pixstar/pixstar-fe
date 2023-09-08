@@ -12,7 +12,9 @@ const AuthPage = ({ formType }) => {
       formType === 'signup' ? __signup(authData) : __login(authData)
     )
       .then((res) => {
-        formType === 'signup' ? navigate('/login') : navigate('/');
+        if (res.type === 'signup/fulfilled' || res.type === 'login/fulfilled') {
+          formType === 'signup' ? navigate('/login') : navigate('/');
+        }
       })
       .catch((err) => {
         alert('서버 연결에 문제가 발생했습니다.');
@@ -20,11 +22,7 @@ const AuthPage = ({ formType }) => {
       });
   };
 
-  return (
-    <>
-      <AuthForm formType={formType} onSubmit={submitAuthData} />
-    </>
-  );
+  return <AuthForm formType={formType} onSubmit={submitAuthData} />;
 };
 
 export default AuthPage;
