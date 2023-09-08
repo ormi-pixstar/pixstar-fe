@@ -30,8 +30,8 @@ const AuthForm = ({ formType, onSubmit }) => {
     }
 
     // formType에 따라 API로 보낼 데이터를 결정
-    if (formType !== 'signup') {
-      delete authToSend.confirmassword;
+    if (formType === 'login') {
+      delete authToSend.confirm_password;
     }
 
     onSubmit(authToSend);
