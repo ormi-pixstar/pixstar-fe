@@ -21,9 +21,16 @@ const AuthPage = ({ formType }) => {
   };
 
   return (
-    <>
-      <AuthForm formType={formType} onSubmit={submitAuthData} />
-    </>
+    <div className='flex items-center justify-center min-h-screen px-4 pb-12 bg-gray-50 sm:px-6 lg:px-8'>
+      <div className='w-full max-w-md space-y-8'>
+        <div>
+          <h2 className='text-3xl font-extrabold text-center text-gray-900 '>
+            {formType === 'signup' ? '회원가입' : '로그인'}
+          </h2>
+        </div>
+        <AuthForm formType={formType} onSubmit={submitAuthData} />
+      </div>
+    </div>
   );
 };
 

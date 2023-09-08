@@ -38,13 +38,14 @@ const AuthForm = ({ formType, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={submitAuthForm}>
+    <form onSubmit={submitAuthForm} className='space-y-4'>
       <input
         name='email'
         placeholder='이메일'
         type='email'
         value={authData.email}
         onChange={handleInputChange}
+        className='w-full px-4 py-2 border rounded-md focus:border-blue-400'
       />
       <input
         name='password'
@@ -52,6 +53,7 @@ const AuthForm = ({ formType, onSubmit }) => {
         type='password'
         value={authData.password}
         onChange={handleInputChange}
+        className='w-full px-4 py-2 border rounded-md focus:border-blue-400'
       />
       {formType === 'login' ? null : (
         <>
@@ -61,6 +63,7 @@ const AuthForm = ({ formType, onSubmit }) => {
             type='password'
             value={authData.confirm_password}
             onChange={handleInputChange}
+            className='w-full px-4 py-2 border rounded-md focus:border-blue-400'
           />
         </>
       )}
