@@ -46,6 +46,7 @@ export const __submitPost = createAsyncThunk(
       });
       return api.fulfillWithValue(res.data);
     } catch (err) {
+      console.log(err);
       return api.rejectWithValue(err.stack);
     }
   }
