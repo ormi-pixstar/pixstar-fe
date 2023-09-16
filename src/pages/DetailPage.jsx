@@ -42,6 +42,7 @@ const DetailPage = () => {
     await dispatch(__getComments(id))
       .then((res) => {
         setComments(res.payload);
+        console.log(comments)
       })
       .catch((err) => {
         console.log(err);
