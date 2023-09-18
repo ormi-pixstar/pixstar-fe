@@ -4,6 +4,8 @@ import profilePlaceholder from '../../assets/images/profilePlaceholder.svg';
 const ListCard = ({ posts }) => {
   const navigate = useNavigate();
 
+  console.log(posts);
+
   return (
     <article className='space-y-6'>
       {posts?.map((post, id) => {
